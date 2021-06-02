@@ -10,14 +10,19 @@
 		Capital Cities
 		</title>
 
-		 <link rel="stylesheet" href="index.css" type="text/css">
+		<link rel="stylesheet" href="index.css" type="text/css">
+
+		<script type="text/javascript" src="findCapitalCities.js">
+		</script>
 	</head>  
 
 	<body>
 		<form> 
 			<label for="countryInput">Country Name:</label>
 			<input type="text" id="countryInput" value="Canada" name="countryName">
-			<input type="button" id="searchButton" value="Search" name="search">
+			<input type="button" id="searchButton" value="Search" name="search" onclick="retrieveCountryData()">
 		</form>
+		<p id="capitalCities">
+		</p>
 	</body>
 </html>

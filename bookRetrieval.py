@@ -9,6 +9,9 @@ book records. At any given time, we should be storing the N books that we access
 most recently. Assume that N can be a large number when making decisions about
 choices of data structure(s) and algorithm(s).
 """
+
+# TODO: Modularize, refactor code more; test solution more
+
 import collections
 import uuid
 
@@ -20,7 +23,6 @@ class BookRecord:
 
 	def __repr__(self):
 		return("Title: " + self.title + " Author: " + self.author + " Language: " + self.language)
-
 
 # We will use a LRU cache to efficiently optimize performance
 # The LRU Cache is a queue with a hash table (dictionary). Thus, an OrderedDict can be made to be a LRU Cache, with a specific order maintained.

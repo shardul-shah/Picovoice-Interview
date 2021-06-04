@@ -1,4 +1,8 @@
 //TODO : refactor+modularize code
+//TODO OUTPUT ERRORS TO CAPITALCITIES PARAGRAPH
+
+//GLOBALS
+capitalCities = document.getElementById("capitalCities");
 
 function retrieveCountryData() 
 {
@@ -53,6 +57,6 @@ function outputCapitalCities(countriesData, capitalCity)
 	}
 
 	output = output.slice(0,-2);
-	document.getElementById("capitalCities").innerHTML = output;
+	capitalCities.innerHTML = output;
 	return output
 }

@@ -1,12 +1,12 @@
 /* CSS for the state of stars */
 
 /* hover star */
-.hovered { /* change name to hovered */
+.hovered {
  	color: rgba(145, 145, 145, 1);
 }
 
 /* clicked/submitted stars */
-.submitted { /* change name to checked */
+.submitted { 
 	color: rgba(0, 0, 0, 1);
 } 
 

@@ -1,36 +1,56 @@
 function findStarPlacement(elem)  
-{
+{	
+	//elem is the element of the current star
+
+	//previous and current star on which the event is being triggered on
 	prevAndCurrStars = []
 	prevAndCurrStars = $(elem).prevAll();
 	prevAndCurrStars.push(elem);	
 
-	nextStars = []
+	//next stars after current star
+	nextStars = [];
 	nextStars = $(elem).nextAll();
 
 	return [prevAndCurrStars, nextStars];
 }
 
-function hoverAnimation(elem) {
+function mouseOverAnimation(elem) {
 	[prevAndCurrStars, nextStars] = findStarPlacement(elem);
 
 	for (var i=0; i<prevAndCurrStars.length; i++)
 	{
-		prevAndCurrStars[i].classList.add("checked");
+		prevAndCurrStars[i].classList.add("hovered", "fa-star");
+		prevAndCurrStars[i].classList.remove("fa-star-o");
 	}
 
 	for (var i=0; i<nextStars.length; i++)
 	{
-		nextStars[i].classList.remove("checked");
+		nextStars[i].classList.remove("hovered");
+	}
+}
+
+function mouseLeaveAnimation(elem) {
+	// only trigger mouseLeaveAnimation if the user has not submitted their rating
+	if (!elem.classList.contains("disabled")) 
+	{
+		[prevAndCurrStars, nextStars] = findStarPlacement(elem);
+
+		for (var i=0; i<prevAndCurrStars.length; i++)
+		{
+			prevAndCurrStars[i].classList.remove("hovered", "fa-star");
+			prevAndCurrStars[i].classList.add("fa-star-o");
+		}
 	}
 }
 
 function clickStar(elem) {
+	// this function is done assuming rating cannot be changed once given and submitted (according to requirements of problem)
 	[prevAndCurrStars, nextStars] = findStarPlacement(elem);
 
 	for (var i=0; i<prevAndCurrStars.length; i++)
 	{
-		prevAndCurrStars[i].classList.add("submitted");
-		prevAndCurrStars[i].classList.add("disabled");
+		prevAndCurrStars[i].classList.add("submitted", "disabled", "fa-star");
+		prevAndCurrStars[i].classList.remove("fa-star-o");
 	}
 
 	for (var i=0; i<nextStars.length; i++)
@@ -47,8 +67,10 @@ function clickStar(elem) {
 	// If I was to do full-fledged unit testing, I would use npm to install the uuid module, and easily generate unique IDs, as shown here:
 	// https://github.com/uuidjs/uuid.
 
-	productId = "197d8362-2600-42e2-a719-0ef9ff51303b"
+	productId = "197d8362-2600-42e2-a719-0ef9ff51303b";
 	submitRating(productId, rating);
+
+	// Code here to display in innerHTML the rating and based on if statements, asking for suggestions/thanking for high rating
 }
 
 function submitRating(productId, rating)
@@ -59,6 +81,6 @@ function submitRating(productId, rating)
 	// This stub function does just this.
 
 	console.log("Rating for product with id " + productId + " is " + rating + ".");
-	
+
 	// code to submit rating with productId using fetch() here
 }

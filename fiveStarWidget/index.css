@@ -1,17 +1,27 @@
-.checked { /* change name to hovered */
-  color: orange;
+/* CSS for the state of stars */
+
+/* hover star */
+.hovered { /* change name to hovered */
+ 	color: rgba(145, 145, 145, 1);
 }
 
-.fa-star {
-	cursor: pointer;
+/* clicked/submitted stars */
+.submitted { /* change name to checked */
+	color: rgba(0, 0, 0, 1);
+} 
 
-}
-
-.fa-star.disabled {
+/* disabled rating after submission */
+.disabled {
 	pointer-events: none;
 }
 
-.submitted { /* change name to checked */
-	color: red;
-} 
+.fa-star, .fa-star-o {
+	cursor: pointer;
+	/* margin left negative padding to make stars cohesive to each other */
+	margin-left: -0.125em; /* approx -2px if default pixel size = 16 px */ 
+	/*color: rgba(255, 255, 255, 1);*/
+}
 
+body {
+	background-color: rgba(255, 227, 87, 1);
+}

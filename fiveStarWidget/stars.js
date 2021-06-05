@@ -90,11 +90,10 @@ function clickStar(elem) {
 }
 
 function submitRating(productId, rating)
-{
+{	//Stub Function
 	// Assuming we get the unique productId of the product in an actual use case as explained above,
 	// we can use the rating given with the productId and we would make a POST request, and
 	// use fetch() to submit this rating to the server and store it.
-	// This stub function does just this.
 
 	console.log("Rating for product with id " + productId + " is " + rating + ".");
 

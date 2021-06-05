@@ -1,18 +1,30 @@
-//TODO : refactor+modularize code
-//TODO OUTPUT ERRORS TO CAPITALCITIES PARAGRAPH
-
-//GLOBALS
-capitalCities = document.getElementById("capitalCities");
+//GLOBAL VARIABLES
+var capitalCities = document.getElementById("capitalCities");
 
 function retrieveCountryData() 
 {
-	var countryName = document.getElementById("countryInput");
+	var countryName = document.getElementById("countryInput"); 
+
+	// error handling for one specific use case I noticed while testing out the problem
+	if (countryName.value.toUpperCase() == "RUSSIA")
+	{	
+		capitalCities.innerHTML = "The country input is \"Russia\". Because of official naming, please type \"Russian Federation\" instead.";
+		return;
+	}
+
+	// note that we want to restrict search to fullText (strict search) for our use case.
 	var url = "https://restcountries.eu/rest/v2/name/"+countryName.value+"?fullText=true";
 
+	// fetch request to retrieve data for the country inputted
 	fetch(url)
 	.then(response => response.clone().json())
 	.then(data => retrieveCapitalCities(data))
-	.catch(errors => console.log("Error:", errors));
+	.catch(errors => 
+		{ 	
+			// most likely, if there is an error, it is that the fetch call (GET request) above failed; this indicates a mistake in the input.
+			capitalCities.innerHTML = "Please make sure the country name is spelled and inputted properly." + "<br/>";
+			return console.log("Errors:", errors);
+		});
 }
 
 function retrieveCapitalCities(countryData)
@@ -22,41 +34,44 @@ function retrieveCapitalCities(countryData)
 
 	if (borderingCountries.length == 0)
 	{	
-		output="No bordering countries for this country.";
-		document.getElementById("capitalCities").innerHTML = output;
-		return
+		// if there are no borderingCountries of a country like New Zealand, the fetch call below will fail.
+		// Only city to be output is the capital city of the country itself in this case.
+		output=capitalCity;
+		capitalCities.innerHTML = output;
+		return;
 	}
 
-	console.log(borderingCountries);
-	var url = "https://restcountries.eu/rest/v2/alpha?codes="
-
+	// make a GET request for all the bordering countries using codes 
+	var url = "https://restcountries.eu/rest/v2/alpha?codes=";
 	for (var i in borderingCountries) 
 	{
 		url+=borderingCountries[i];
 		url+=";";
 	}
+	// remove the last semicolon
 	url = url.slice(0, -1);
-	console.log(url);
 	
+	// fetch request to retrieve data for all of the neighboring countries of the inputted country
 	fetch(url)
 	.then(response => response.clone().json())
 	.then(data => outputCapitalCities(data, capitalCity))
 	.catch(errors => console.log("Error:", errors));
-
-	return
+	return;
 }
 
 function outputCapitalCities(countriesData, capitalCity) 
 {	
 	output = capitalCity + ", ";
-
+	//summate capital cities to output
 	for (var i in countriesData)
 	{
-		output+=countriesData[i].capital
-		output+=", "
+		output+=countriesData[i].capital;
+		output+=", ";
 	}
 
+	// remove ", " from the end
 	output = output.slice(0,-2);
+
 	capitalCities.innerHTML = output;
-	return output
+	return output;
 }

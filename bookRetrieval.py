@@ -1,26 +1,14 @@
-"""
-Assume we have a function get_book_info(isbn) that takes a string ISBN argument
-and retrieves a struct/object containing the Title, Author, and Language of a book
-(each represented as a string) from a database. Write a wrapper function that
-increases performance by keeping some of the database results in memory for the
-quick lookup.
-To prevent memory from growing unbounded, we only want to store a maximum of N
-book records. At any given time, we should be storing the N books that we accessed
-most recently. Assume that N can be a large number when making decisions about
-choices of data structure(s) and algorithm(s).
-"""
-
-# TODO: Modularize, refactor code more; test solution more
-
 import collections
 import uuid
 
+# A Book
 class BookRecord:
 	def __init__(self, title, author, language):
 		self.title = title
 		self.author = author
 		self.language = language
 
+	# Representation of Book
 	def __repr__(self):
 		return("Title: " + self.title + " Author: " + self.author + " Language: " + self.language)
 
@@ -57,13 +45,15 @@ class LRUCache:
 			self.cache.popitem(last = False)
 
 
+# stub function which retrieves book from database
 def getBookInfo(isbn):
-	# retrieve book from database
-
-	# book is of type Book
-	return bookRecord
+	# book is of type BookRecord
+	return book
 
 def wrapper(max):
+	# A simple testcase with 3 books
+
+	# Our LRU cache
 	bookRecordCache = LRUCache(max)
 
 	testBookRecord1 = BookRecord("Test1", "Shardul Shah", "English")
@@ -81,9 +71,15 @@ def wrapper(max):
 	print(bookRecordCache.cache, "\n")
 	bookRecordCache.getBookRecord(isbn1)
 	print(bookRecordCache.cache, "\n")
+	bookRecordCache.insertBookRecord(isbn3, testBookRecord3)
+	print(bookRecordCache.cache, "\n")
+
 
 def main():
-	wrapper(2)
+	maxBookRecords = 2
+
+	# test out wrapper function on program run
+	wrapper(maxBookRecords)
 
 if __name__ == '__main__':
 	main()

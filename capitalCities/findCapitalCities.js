@@ -30,7 +30,7 @@ function retrieveCapitalCities(countryData)
 	console.log(borderingCountries);
 	var url = "https://restcountries.eu/rest/v2/alpha?codes="
 
-	for (i in borderingCountries) 
+	for (var i in borderingCountries) 
 	{
 		url+=borderingCountries[i];
 		url+=";";
@@ -50,7 +50,7 @@ function outputCapitalCities(countriesData, capitalCity)
 {	
 	output = capitalCity + ", ";
 
-	for (i in countriesData)
+	for (var i in countriesData)
 	{
 		output+=countriesData[i].capital
 		output+=", "

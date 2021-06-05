@@ -1,0 +1,17 @@
+.checked { /* change name to hovered */
+  color: orange;
+}
+
+.fa-star {
+	cursor: pointer;
+
+}
+
+.fa-star.disabled {
+	pointer-events: none;
+}
+
+.submitted { /* change name to checked */
+	color: red;
+} 
+

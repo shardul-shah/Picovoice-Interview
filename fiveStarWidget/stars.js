@@ -85,8 +85,6 @@ function clickStar(elem) {
 		output+="To get in touch or leave us further suggestions, feel free to email us at foobartest@gmail.com.";
 	}
 	document.getElementById("feedback").innerHTML = output;
-
-	// Code here to display in innerHTML the rating and based on if statements, asking for suggestions/thanking for high rating
 }
 
 function submitRating(productId, rating)

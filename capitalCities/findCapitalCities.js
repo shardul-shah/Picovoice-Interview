@@ -30,7 +30,7 @@ function retrieveCountryData()
 function retrieveCapitalCities(countryData)
 {
 	var borderingCountries = countryData[0].borders;
-	capitalCity = countryData[0].capital;
+	var capitalCity = countryData[0].capital;
 
 	if (borderingCountries.length == 0)
 	{	

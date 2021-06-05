@@ -58,7 +58,9 @@ function clickStar(elem) {
 		nextStars[i].classList.add("disabled");
 	}	
 
-	rating = elem.getAttribute("data-star");
+	// get rating and convert it to an integer
+	rating = parseInt(elem.getAttribute("data-star"));
+
 	// productId would be retrieved here. This can be done either directly here,
 	// or using another function to modularize the code further.
 
@@ -69,6 +71,20 @@ function clickStar(elem) {
 
 	productId = "197d8362-2600-42e2-a719-0ef9ff51303b";
 	submitRating(productId, rating);
+
+	if (rating >= 1 && rating <=3) 
+	{
+		var output = "We are sorry to hear that you did not find this product to be of a high quality. ";
+		output+="We strive for the best products. Please feel free to email us any feedback at foobartest@gmail.com.";
+	}
+
+	else 
+	// else rating is 4 or 5
+	{
+		var output = "Thank you! We are pleased you think so highly of our product. However, improvements can always be made. ";
+		output+="To get in touch or leave us further suggestions, feel free to email us at foobartest@gmail.com.";
+	}
+	document.getElementById("feedback").innerHTML = output;
 
 	// Code here to display in innerHTML the rating and based on if statements, asking for suggestions/thanking for high rating
 }

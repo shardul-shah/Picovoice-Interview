@@ -15,11 +15,22 @@
 	pointer-events: none;
 }
 
+/* FontAwesome stars */
 .fa-star, .fa-star-o {
 	cursor: pointer;
 	/* margin left negative padding to make stars cohesive to each other */
-	margin-left: -0.125em; /* approx -2px if default pixel size = 16 px */ 
-	/*color: rgba(255, 255, 255, 1);*/
+	margin-left: -0.125em; /* -0.125em is equal to approximately -2px if default pixel size = 16 px */ 
+}
+
+/* styling of feedback message */
+#feedback {
+	font-family: Papyrus, "Courier New", "Times New Roman", Arial;
+	color: rgba(0, 0, 0, 1);
+ 	text-transform: none; 
+ 	font-weight: bolder;
+ 	font-size: 2.0vmax; /* using vmax (and em above) for responsive design */ 
+ 	letter-spacing: 0.07vw; /* using vw for responsive design */
+ 	text-align: left;
 }
 
 body {

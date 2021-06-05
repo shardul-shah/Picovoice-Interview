@@ -1,5 +1,5 @@
 import collections
-import uuid
+import uuid # only needed for testing out the LRUCache below. Would not be needed if getBookInfo(isbn) was a non-stub function.
 
 # A Book
 class BookRecord:
@@ -22,10 +22,11 @@ class LRUCache:
 		self.cache = collections.OrderedDict()
 		self.capacity = n
 
+	# this function would not be needed in an actual use case of this problem. See function wrapper() for more information.
 	def getBookRecord(self, isbn):
 		if isbn not in self.cache:
 			# this book record is currently not in the LRU Cache
-			return -1
+			return None
 		else:
 			# we have most recently accessed this book record; move it to the end of the OrderedDict
 			# return the book record for the according isbn
@@ -35,7 +36,7 @@ class LRUCache:
 	
 	def insertBookRecord(self, isbn, bookRecord):
 		# insert the book record for the according isbn regardless of anything
-		# Then, then move it to the end of the OrderedDict (most recently accessed record)
+		# Then, move it to the end of the OrderedDict (most recently accessed record)
 		self.cache[isbn] = bookRecord
 		self.cache.move_to_end(isbn)
 
@@ -45,17 +46,21 @@ class LRUCache:
 			self.cache.popitem(last = False)
 
 
-# stub function which retrieves book from database
+# stub function; assume it retrieves book from database
 def getBookInfo(isbn):
-	# book is of type BookRecord
-	return book
+	# would return (isbn, retrievedBook) in reality
+	return
 
 def wrapper(max):
-	# A simple testcase with 3 books
+	# In the wrapper, if getBookInfo() was a non-stub function, we would simply insert each book and isbn as we access them from getBookInfo()
+	# The LRU cache would be modified accordingly using only insertBookRecord(isbn, bookRecord).
+	# In the actual use case, getBookRecord() would not be used to have a working LRU cache.
+	# However, I made this getBookRecord() to show that the LRU cache is working as intended.
 
 	# Our LRU cache
 	bookRecordCache = LRUCache(max)
 
+	# A simple testcase with 3 books.
 	testBookRecord1 = BookRecord("Test1", "Shardul Shah", "English")
 	testBookRecord2 = BookRecord("Test2", "Shardul Shah", "English")
 	testBookRecord3 = BookRecord("Test3", "Shardul Shah", "English")
@@ -65,6 +70,7 @@ def wrapper(max):
 	isbn2 = str(uuid.uuid4())
 	isbn3 = str(uuid.uuid4())
 
+	# demonstrates the LRUCache working as intended in the terminal
 	bookRecordCache.insertBookRecord(isbn1, testBookRecord1)
 	print(bookRecordCache.cache, "\n")
 	bookRecordCache.insertBookRecord(isbn2, testBookRecord2)
@@ -74,6 +80,12 @@ def wrapper(max):
 	bookRecordCache.insertBookRecord(isbn3, testBookRecord3)
 	print(bookRecordCache.cache, "\n")
 
+	 # note this does nothing as isbn2 is no longer in the LRU cache - it was least recently accessed when isbn3 was inserted.
+	bookRecordCache.getBookRecord(isbn2)
+	print(bookRecordCache.cache, "\n")
+	
+	bookRecordCache.getBookRecord(isbn1)
+	print(bookRecordCache.cache, "\n")
 
 def main():
 	maxBookRecords = 2
